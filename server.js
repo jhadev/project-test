@@ -33,8 +33,10 @@ passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+const Budget = require('./models/budget');
+
 // Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/mern-auth-demo');
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/currensee-demo');
 
 // Start the API server
 app.listen(PORT, function() {
