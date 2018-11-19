@@ -1,6 +1,10 @@
+import React from 'react';
 import SideNav, { Toggle, Nav, NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, Button } from 'reactstrap';
-<SideNav
+
+const LeftNav = (props) => {
+  return (
+    <SideNav
     onSelect={(selected) => {
        
     }}
@@ -35,3 +39,7 @@ import { Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, Button } fr
         </NavItem>
     </SideNav.Nav>
 </SideNav>
+  )
+}
+
+export default LeftNav;

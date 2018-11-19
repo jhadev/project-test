@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router-dom";
 import API from "../utils/API";
+import LeftNav from '../components/LeftNav';
 
 class Main extends Component {
   state = {
@@ -63,6 +64,7 @@ class Main extends Component {
     return (
       //<h1>You Made it to the main page {this.state.isLoggedIn.username}!</h1>
       <div className="row">
+        <LeftNav/>
         <div className="col-12">
           <h1>Search on Walmart.com</h1>
         </div>
