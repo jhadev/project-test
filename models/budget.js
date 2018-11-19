@@ -18,6 +18,10 @@ const Budget  = new Schema({
   income: {
     type: Boolean,
     required: true
+  },
+  _userID: {
+    type: Schema.Types.ObjectId,
+    ref: "User"
   }
 });
 
