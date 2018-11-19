@@ -13,9 +13,9 @@ module.exports = {
   findAllByCategory: function (req, res) {
     db
       .Budget
-      .find({category: req.params.category}
+      .find({category: req.params.category})
       .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err)));
+      .catch(err => res.status(422).json(err));
   },
   findById: function (req, res) {
     db
