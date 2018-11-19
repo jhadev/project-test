@@ -5,8 +5,7 @@ module.exports = {
   findAll: function (req, res) {
     db
       .Budget
-      .find(req.query)
-      .populate("userID")
+      .find({userID: req.user._id})
       .sort({date: -1})
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
@@ -14,7 +13,7 @@ module.exports = {
   findAllByCategory: function (req, res) {
     db
       .Budget
-      .find({category: req.params.category})
+      .find({userID: req.user._id, category: req.params.category})
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
