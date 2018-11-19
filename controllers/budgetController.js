@@ -6,6 +6,7 @@ module.exports = {
     db
       .Budget
       .find(req.query)
+      .populate("userID")
       .sort({date: -1})
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
@@ -13,9 +14,9 @@ module.exports = {
   findAllByCategory: function (req, res) {
     db
       .Budget
-      .find({category: req.params.category}
+      .find({category: req.params.category})
       .then(dbModel => res.json(dbModel))
-      .catch(err => res.status(422).json(err)));
+      .catch(err => res.status(422).json(err));
   },
   findById: function (req, res) {
     db
@@ -25,6 +26,8 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   create: function (req, res) {
+    console.log(req.user);
+    req.body.userID = req.user._id;
     db
       .Budget
       .create(req.body)
@@ -32,7 +35,10 @@ module.exports = {
       .catch(err => res.status(422).json(err));
   },
   update: function (req, res) {
-    Budget.findOneAndUpdate({
+    req.body.userID = req.user._id;
+    db
+      .Budget
+      .findOneAndUpdate({
       _id: req.params.id
     }, req.body)
       .then(dbModel => res.json(dbModel))

@@ -31,7 +31,13 @@ export default {
     return axios.post("/api/users/register", userInfo)
   },
 
+  budgetPost: function(userInfo) {
+    return axios.post("/api/budget", userInfo)
+  },
+
   getWalmart: function(searchTerm) {
     return axios.get(`https://api.walmartlabs.com/v1/search?apiKey=4vqcppc7kjbk8zsktvkry97c&query=${searchTerm}`)
-  }
+  },
+
+
 }
