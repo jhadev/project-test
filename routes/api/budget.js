@@ -19,4 +19,8 @@ router
   .route('/category/:category')
   .get(budgetController.findAllByCategory)
 
+router
+  .route('/month')
+  .get(budgetController.monthField)
+
 module.exports = router;

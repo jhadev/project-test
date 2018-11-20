@@ -21,8 +21,7 @@ const Budget  = new Schema({
   },
   userID: {
     type: Schema.Types.ObjectId,
-    ref: "User",
- 
+    ref: "User"
   }
 });
 

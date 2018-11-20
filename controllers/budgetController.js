@@ -10,6 +10,25 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+  monthField: function (req, res) {
+    db
+      .Budget
+      .aggregate(
+        [
+          {
+            $project: {
+              amount: 1,
+              description: 1,
+              income: 1,
+              category: 1,
+              "monthString": { $substrBytes: [ "$date", 0, 2 ] }
+            }
+          }
+        ]
+      )
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
   findAllByCategory: function (req, res) {
     db
       .Budget
