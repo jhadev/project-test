@@ -8,23 +8,26 @@ module.exports = {
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+
   monthField: function(req, res) {
     db.Budget.aggregate([
-      {$match : {userID: req.user._id}},
-        {$project: {
+      { $match: { userID: req.user._id } },
+      {
+        $project: {
           amount: 1,
           description: 1,
           income: 1,
           category: 1,
           date: 1,
           userID: 1,
-          monthString: { $substrBytes: ["$date", 0, 2] }
+          month: { $substrBytes: ["$date", 0, 2] }
         }
       }
     ])
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
   },
+
   findAllByCategory: function(req, res) {
     db.Budget.find({ userID: req.user._id, category: req.params.category })
       .then(dbModel => res.json(dbModel))
@@ -58,5 +61,57 @@ module.exports = {
       .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
+  },
+  sumByIncome: function(req, res) {
+    db.Budget
+      .aggregate([
+        { $match: { userID: req.user._id } },
+        {
+          $group: {
+            _id: { income: "$income" },
+            budgetTotal: { $sum: "$amount" }
+          }
+        }
+      ])
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+  sumByMonth: function(req, res) {
+    db.Budget
+      .aggregate(
+      [
+        { $match: { userID: req.user._id } },
+         {
+           $group : {
+              _id : { income: "$income" , month: { $substrBytes: ["$date", 0, 2] }},
+              totalPrice: { $sum: "$amount" }
+           }
+         }
+      ]
+    )
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
+  },
+  sumByCategory: function(req, res) {
+    db.Budget.aggregate([
+      { $match: { userID: req.user._id } },
+       {
+         $group : {
+            _id : { income: "$income" , category: "$category", month: { $substrBytes: ["$date", 0, 2] }},
+            categoryTotal: { $sum: "$amount" }
+         }
+       }
+    ])
+      .then(dbModel => res.json(dbModel))
+      .catch(err => res.status(422).json(err));
   }
 };
+
+
+
+
+
+
+
+
+

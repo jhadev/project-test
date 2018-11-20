@@ -23,4 +23,15 @@ router
   .route('/month')
   .get(budgetController.monthField)
 
+router
+  .route('/sumbyincome')
+  .get(budgetController.sumByIncome)
+
+router
+  .route('/sumbymonth')
+  .get(budgetController.sumByMonth)
+
+router
+  .route('/sumbycategory')
+  .get(budgetController.sumByCategory)
 module.exports = router;
