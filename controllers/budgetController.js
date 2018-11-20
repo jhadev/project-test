@@ -16,6 +16,8 @@ module.exports = {
           description: 1,
           income: 1,
           category: 1,
+          date: 1,
+          userID: 1,
           monthString: { $substrBytes: ["$date", 0, 2] }
         }
       }
