@@ -16,6 +16,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@material-ui/core": "^3.5.1",
     "@trendmicro/react-sidenav": "^0.4.5",
     "axios": "^0.17.1",
     "body-parser": "^1.18.2",
