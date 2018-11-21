@@ -19,7 +19,11 @@ const Budget  = new Schema({
     type: Boolean,
     required: true
   },
+<<<<<<< HEAD
   _userID: {
+=======
+  userID: {
+>>>>>>> 27ee7d9cc636b47f24efede859bb91e9a9675906
     type: Schema.Types.ObjectId,
     ref: "User"
   }
